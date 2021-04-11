@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package pnet;
+
+message RoomInfo {
+    message ClientInfo {
+        string name = 1;
+    }
+
+    bool is_full = 1;
+    fixed32 address = 2;
+    uint32 port = 3;
+    repeated ClientInfo clients = 4;
+    uint32 owner_id = 5;
+}
+
+message QueryRoomInfoRequest {
+    bool not_full = 1;
+}
+
+message QueryRoomInfoResponse {
+    repeated RoomInfo rooms = 1;
+}

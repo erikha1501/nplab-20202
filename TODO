@@ -1,0 +1,21 @@
++ A new dedicated class should manage game play (GameInstance ?)
+    GameInstance will manage game logic and player connection in a seperated thread
+
++ Room should only store PlayerInfos (name, ip-endpoint, state) and room state (idle, playing)
+
++ Server handles all player interactions with a room (create, join, leave)
+
++ When all players are ready:
+    1. Room owner attempts to start the game:
+        Server sends GameInstance info (ip-endpoint) to all players and waits for acknowlegdement
+        Players will communicate with GameInstance from then on
+
+    2. GameInstance sends map info, player initial positions, ... and waits for acknowlegdement <waiting>
+        GameInstance transitions to <started>
+
++ Should GameInstance be owned by other component?
+    a) Owned: Room / Server ?
+    b) Self-contained: GameInstance will refer to all players using their id.
+
+
++ TODO: fix .clang-format for public/private indentation
