@@ -9,7 +9,13 @@ class UDPSocket
 {
 public:
     UDPSocket(uint16_t port, bool blocking);
+
     UDPSocket(const UDPSocket&) = delete;
+    UDPSocket& operator=(const UDPSocket&) = delete;
+
+    UDPSocket(UDPSocket&&) = default;
+    UDPSocket& operator=(UDPSocket&&) = default;
+
     ~UDPSocket();
 
     uint16_t bindedPort() const;

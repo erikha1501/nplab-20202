@@ -1,7 +1,7 @@
 PROJ_NAME := client
 
 CXX := g++
-CXXFLAGS := -pthread -I/usr/local/include
+CXXFLAGS := -pthread -I/usr/local/include $(CXX_STD_FLAGS)
 LDFLAGS := -L/usr/local/lib -lprotobuf -lpthread
 
 SRC_DIR := ./src

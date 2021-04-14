@@ -3,6 +3,12 @@
         "*.inc": "cpp",
         "type_traits": "cpp",
         "random": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "memory_resource": "cpp",
+        "string_view": "cpp"
     }
 }

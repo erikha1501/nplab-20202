@@ -1,6 +1,9 @@
+CXX_STD_FLAGS := -std=c++17
+
 G_BIN_DIR := $(shell realpath ./bin)
 G_OBJ_DIR := $(shell realpath ./obj)
 
+export CXX_STD_FLAGS
 export G_BIN_DIR
 export G_OBJ_DIR
 

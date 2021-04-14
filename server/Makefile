@@ -1,7 +1,7 @@
 PROJ_NAME := server
 
 CXX := g++
-CXXFLAGS := -pthread -I/usr/local/include
+CXXFLAGS := -pthread -I/usr/local/include $(CXX_STD_FLAGS)
 LDFLAGS := -L/usr/local/lib -lprotobuf -lpthread
 
 SRC_DIR := ./src
@@ -17,24 +17,25 @@ build_bin: $(BIN_DIR)/$(PROJ_NAME)
 
 
 # server -> build_obj
-$(BIN_DIR)/$(PROJ_NAME): $(OBJ_FILES) | bin_dir_check
-	$(CXX) $^ $(DEP_OBJ_FILES) -o $@ $(LDFLAGS)
+$(BIN_DIR)/$(PROJ_NAME): build_obj | bin_dir_check
+	$(CXX) $(OBJ_FILES) $(DEP_OBJ_FILES) -o $@ $(LDFLAGS)
 
-build_obj: $(OBJ_FILES)
+build_obj: obj_dir_check $(OBJ_FILES)
+
 
 # *.cpp.o -> *.cpp
-$(OBJ_DIR)/%.cpp.o: $(SRC_DIR)/%.cpp | obj_dir_check
+$(OBJ_DIR)/%.cpp.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 # *.cc.o -> *.cc
-$(OBJ_DIR)/%.cc.o: $(SRC_DIR)/%.cc | obj_dir_check
+$(OBJ_DIR)/%.cc.o: $(SRC_DIR)/%.cc
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 bin_dir_check:
 	@mkdir -p $(BIN_DIR)
 
 obj_dir_check:
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $(OBJ_FILES))
 
 .PHONY: clean
 

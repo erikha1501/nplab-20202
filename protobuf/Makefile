@@ -1,7 +1,7 @@
 PROJ_NAME := protobuf
 
 CXX := g++
-CXXFLAGS := -pthread -I/usr/local/include
+CXXFLAGS := -pthread -I/usr/local/include $(CXX_STD_FLAGS)
 
 PROTOC := protoc
 
