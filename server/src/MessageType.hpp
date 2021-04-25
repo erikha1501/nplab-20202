@@ -1,6 +1,6 @@
 #pragma once
 
-enum class MessageType
+enum class MessageType : uint8_t
 {
     QueryRoomInfoRequest = 0,
     QueryRoomInfoResponse = 1,
@@ -12,5 +12,11 @@ enum class MessageType
     JoinRoomResponse = 5,
 
     LeaveRoomRequest = 6,
-    LeaveRoomResponse = 7
+    LeaveRoomResponse = 7,
+
+    RoomInfoChanged = 8,
+
+    PlayerInput = 9,
+    PlayerState = 10,
+    GameState = 11
 };

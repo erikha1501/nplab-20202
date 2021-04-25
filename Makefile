@@ -7,6 +7,9 @@ export CXX_STD_FLAGS
 export G_BIN_DIR
 export G_OBJ_DIR
 
+CXX_DEBUG_FLAGS := $(if $(DEBUG), -g,)
+export CXX_DEBUG_FLAGS
+
 all: build_protobuf build_server build_client
 	
 

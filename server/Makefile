@@ -1,8 +1,8 @@
 PROJ_NAME := server
 
 CXX := g++
-CXXFLAGS := -pthread -I/usr/local/include $(CXX_STD_FLAGS)
-LDFLAGS := -L/usr/local/lib -lprotobuf -lpthread
+CXXFLAGS := -pthread -I/usr/local/include -I../packages/include -I../protobuf/src/ $(CXX_STD_FLAGS) $(CXX_DEBUG_FLAGS)
+LDFLAGS := -L/usr/local/lib -lprotobuf -lpthread -L../packages/lib -lbox2d
 
 SRC_DIR := ./src
 OBJ_DIR := $(if $(G_OBJ_DIR),$(G_OBJ_DIR)/$(PROJ_NAME),./obj)

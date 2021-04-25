@@ -19,6 +19,7 @@ public:
     {
         ssize_t id = -1;
 
+        // Exceed limit
         if (m_list.size() >= m_maxElementCount)
         {
             return std::make_pair(m_list.end(), false);

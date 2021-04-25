@@ -9,6 +9,10 @@
         "string": "cpp",
         "vector": "cpp",
         "memory_resource": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "chrono": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "optional": "cpp"
     }
 }

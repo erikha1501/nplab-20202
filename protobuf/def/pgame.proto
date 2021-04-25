@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package pgame;
+
+message PlayerIdentity {
+    uint32 room_id = 1;
+    uint32 player_id = 2;
+}
+
+message PlayerInput {
+    PlayerIdentity player_identity = 1;
+
+    float direction_x = 2;
+    float direction_y = 3;
+    bool bomb_placed = 4;
+}
+
+message PlayerState {
+    uint32 client_id = 1;
+
+    float position_x = 2;
+    float position_y = 3;
+
+    float direction_x = 4;
+    float direction_y = 5;
+}
+
+message JoinGameRequest {
+    PlayerIdentity player_identity = 1;
+}
+
+message JoinGameResponse {
+    bool success = 1;
+    MapInfo map_info = 2;
+}
+
+message MapInfo {
+    uint32 width = 1;
+    uint32 height = 2;
+
+    bytes tiles_data = 3;
+
+    // Spawn pos ?
+}
+
+message GameState {
+    repeated PlayerState player_states = 1;
+}

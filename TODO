@@ -1,21 +1,26 @@
-+ A new dedicated class should manage game play (GameInstance ?)
-    GameInstance will manage game logic and player connection in a seperated thread
-
 + Room should only store PlayerInfos (name, ip-endpoint, state) and room state (idle, playing)
-
-+ Server handles all player interactions with a room (create, join, leave)
 
 + When all players are ready:
     1. Room owner attempts to start the game:
-        Server sends GameInstance info (ip-endpoint) to all players and waits for acknowlegdement
-        Players will communicate with GameInstance from then on
+        [] Server sends GameServer info (ip-endpoint) to all players (GameServerCreated message)
+        [] Server starts GameServer. GameServer listens to JoinGameRequest messages (timeout included)
+        [] Players send JoinGameRequest messages - GameServer responds with JoinGameResponse {MapInfo}  | Disconnected -> Connecting
+        [] Players reply with MapInfoReceived                                                           | Connecting   -> Connected
+        [] (After timeout and there are at least 2 players connected) or (All players have joined), the game will start
+        [] GameServer sends GameStateChanged {State::Starting, countdown} periodically (0.5s)
+        [] GameServer sends GameStateChanged {State::Started}
+        [] Players sends PlayerInput and receives GameState
 
-    2. GameInstance sends map info, player initial positions, ... and waits for acknowlegdement <waiting>
-        GameInstance transitions to <started>
+        [] Heartbeat
 
-+ Should GameInstance be owned by other component?
-    a) Owned: Room / Server ?
-    b) Self-contained: GameInstance will refer to all players using their id.
+Server:
+[x] Consider renaming GameInstance to GameServer
+[x] Consider renaming InputObject, StateObject to *Data
+[x] Consider renaming GamePlayer to PlayerObject / PlayerEntity
+[] Implement map data (obstacles, spawn locations)
+[] Add BombObject / BombEntity
+    BombEntity contains a <time_interval> value
+    Use b2ContactListener to handle bomb detonation
 
-
-+ TODO: fix .clang-format for public/private indentation
+[] Store (all/ only bomb) entities as inline object
+    [] Maybe switch to shared_ptr and implement entity pooling later

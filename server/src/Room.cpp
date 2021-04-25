@@ -4,16 +4,6 @@ Room::Room() : m_playerList(s_maxPlayerCount), m_ownerID(-1)
 {
 }
 
-bool Room::is_full() const
-{
-    return m_playerList.size() >= s_maxPlayerCount;
-}
-
-int Room::ownerID() const
-{
-    return m_ownerID;
-}
-
 int Room::addPlayer(Player player)
 {
     const auto [iterator, result] = m_playerList.add(std::move(player));
@@ -45,7 +35,6 @@ bool Room::removePlayer(uint id)
     if (id == m_ownerID && m_playerList.size() > 0)
     {
         auto iter = m_playerList.begin();
-
         m_ownerID = iter->first;
     }
     
@@ -57,6 +46,19 @@ const Player* Room::findPlayer(uint id) const
     return m_playerList.get(id);
 }
 
+const Player* Room::findPlayer(const IPEndpoint& endpoint) const
+{
+    for (auto& [id, player] : m_playerList)
+    {
+        if (player.endpoint() == endpoint)
+        {
+            return &player;
+        }
+    }
+
+    return nullptr;
+}
+
 void Room::serializeToRoomInfo(pnet::RoomInfo& roomInfo) const
 {
     roomInfo.set_is_full(is_full());
@@ -66,5 +68,6 @@ void Room::serializeToRoomInfo(pnet::RoomInfo& roomInfo) const
     {
         pnet::ClientInfo* clientInfo = roomInfo.add_clients();
         clientInfo->set_name(player.name());
+        clientInfo->set_id(id);
     }
 }

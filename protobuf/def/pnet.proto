@@ -3,13 +3,15 @@ syntax = "proto3";
 package pnet;
 
 message ClientInfo {
-    string name = 1;
+    uint32 id = 1;
+    string name = 2;
 }
 
 message RoomInfo {
-    bool is_full = 1;
+    uint32 id = 1;
+    uint32 owner_id = 2;
+    bool is_full = 3;
     repeated ClientInfo clients = 4;
-    uint32 owner_id = 5;
 }
 
 message ClientIdentity {

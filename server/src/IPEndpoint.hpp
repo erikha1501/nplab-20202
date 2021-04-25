@@ -49,6 +49,16 @@ public:
     {
         return inet_ntoa(m_sa.sin_addr);
     }
+
+    friend bool operator==(const IPEndpoint& left, const IPEndpoint& right)
+    {
+        return left.m_sa.sin_addr.s_addr == right.m_sa.sin_addr.s_addr && left.m_sa.sin_port == right.m_sa.sin_port;
+    }
+    friend bool operator!=(const IPEndpoint& left, const IPEndpoint& right)
+    {
+        return !(left == right);
+    }
+
 private:
     sockaddr_in m_sa;
 };
